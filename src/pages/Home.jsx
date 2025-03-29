@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
 function Home() {
   return (
-    <div>Home</div>
-  )
+    <div className="home-page">
+      <div className="searchBar">
+        <input placeholder="Search Bar" type="text" className="searchInput" />
+        <button className="searchBtn"> </button>
+      </div>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
