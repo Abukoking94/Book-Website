@@ -23,6 +23,7 @@ function Navbar() {
         </Link>
       </ul>
     </div>
+    
   );
 }
 
