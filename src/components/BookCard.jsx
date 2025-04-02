@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 
-const BooksCard = ({ searchQuery }) => {
-  const [books, setBooks] = useState("");
+const BookCard = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [books, setBooks] = useState([]);
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await fetch(
           `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
             searchQuery
-          )}`
+          )}&maxResults=35`
         );
 
         if (!response.ok) throw new Error("Failed to fetch");
@@ -40,6 +42,8 @@ const BooksCard = ({ searchQuery }) => {
     fetchBooks();
   }, [searchQuery]);
 
+ 
+
   return (
     <div>
       {books.length === 0 ? (
@@ -56,4 +60,4 @@ const BooksCard = ({ searchQuery }) => {
   );
 };
 
-export default BooksCard;
+export default BookCard;
