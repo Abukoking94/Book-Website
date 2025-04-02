@@ -17,7 +17,7 @@ const Hero = () => {
       }
 
       const mappedBooks =
-          data.items?.map((item) => ({
+         data.items?.map((item) => ({
             id: item.id,
             title: item.volumeInfo.title || "Untitled",
             authors: item.volumeInfo.authors?.join(", ") || "Unknown Author",
