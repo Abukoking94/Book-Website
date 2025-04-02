@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { , useState } from "react";
 
-const Hero = ({ searchQuery }) => {
+const Hero = () => {
   const [books, setBooks] = useState([]);
-
-  
     const fetchBooks = async () => {
       try {
         const response = await fetch(
@@ -18,7 +16,12 @@ const Hero = ({ searchQuery }) => {
       }
     };
 
-    fetchBooks();
+  fetchBooks();
+  
+  return;
 };
 
 export default Hero;
+
+
+
