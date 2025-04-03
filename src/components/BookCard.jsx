@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-const BookCard = () => {
+const BookCard = ({ searchQuery }) => {
   const [books, setBooks] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -45,13 +45,12 @@ const BookCard = () => {
     const initials = title ? title[0] : "?";
     return `data:image/svg+xml;utf8,${encodeURIComponent(
       `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
-            <rect width="100%" height="100%" fill="#2D3748"/>
-            <text x="50%" y="50%" fill="#4A5568" font-family="monospace" font-size="80" 
-            text-anchor="middle" dominant-baseline="middle">${initials}</text>
-            </svg>`
+             <rect width="100%" height="100%" fill="#2D3748"/>
+             <text x="50%" y="50%" fill="#4A5568" font-family="monospace" font-size="80" 
+             text-anchor="middle" dominant-baseline="middle">${initials}</text>
+             </svg>`
     )}`;
   };
-
   return (
     <div>
       {books.length === 0 ? (
@@ -67,5 +66,4 @@ const BookCard = () => {
     </div>
   );
 };
-
 export default BookCard;
