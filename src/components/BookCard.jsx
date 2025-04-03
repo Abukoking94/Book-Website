@@ -56,13 +56,16 @@ const BookCard = ({ searchQuery }) => {
    <div>
      {books.map((book) => (
        <div key={book.id}>
-         <a href={book.infoLink} target="_blank">
+         <a href={book.infoLink} target="_blank" rel="noopener noreferrer">
            <img
              src={book.imageUrl}
              alt={book.title}
+             onError={(e) => {
+               e.target.onerror = null;
+               e.target.src = getPlaceholder(book.title);
+             }}
            />
          </a>
-        
          <div>
            <h3>{book.title}</h3>
            <p>By {book.authors}</p>
@@ -74,7 +77,7 @@ const BookCard = ({ searchQuery }) => {
            <p>{book.description}</p>
          </div>
          <div>
-           <a href={book.infoLink} target="_blank">
+           <a href={book.infoLink} target="_blank" rel="noopener noreferrer">
              View Details
            </a>
          </div>
