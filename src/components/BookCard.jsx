@@ -9,7 +9,7 @@ const BookCard = ({ searchQuery }) => {
         const response = await fetch(
           `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
             searchQuery
-          )}&maxResults=35`
+          )}&maxResults=12`
         );
 
         if (!response.ok) throw new Error("Failed to fetch");
@@ -51,19 +51,39 @@ const BookCard = ({ searchQuery }) => {
              </svg>`
     )}`;
   };
-  return (
-    <div>
-      {books.length === 0 ? (
-        <p>No books found</p>
-      ) : (
-        books.map((book) => (
-          <div key={book.id}>
-            <h3>{book.title}</h3>
-            <img src={book.imageUrl} alt={book.title} />
-          </div>
-        ))
-      )}
-    </div>
-  );
+  
+ return books.length > 0 ? (
+   <div>
+     {books.map((book) => (
+       <div key={book.id}>
+         <a href={book.infoLink} target="_blank">
+           <img
+             src={book.imageUrl}
+             alt={book.title}
+           />
+         </a>
+        
+         <div>
+           <h3>{book.title}</h3>
+           <p>By {book.authors}</p>
+           <p>{book.categories}</p>
+           <div>
+             <span>⭐ {book.rating}</span>
+             <span>({book.ratingsCount} ratings)</span>
+           </div>
+           <p>{book.description}</p>
+         </div>
+         <div>
+           <a href={book.infoLink} target="_blank">
+             View Details
+           </a>
+         </div>
+       </div>
+     ))}
+   </div>
+ ) : (
+   <p>No books found</p>
+ );
+
 };
 export default BookCard;
