@@ -51,42 +51,65 @@ const BookCard = ({ searchQuery }) => {
              </svg>`
     )}`;
   };
-  
- return books.length > 0 ? (
-   <div>
-     {books.map((book) => (
-       <div key={book.id}>
-         <a href={book.infoLink} target="_blank" rel="noopener noreferrer">
-           <img
-             src={book.imageUrl}
-             alt={book.title}
-             onError={(e) => {
-               e.target.onerror = null;
-               e.target.src = getPlaceholder(book.title);
-             }}
-           />
-         </a>
-         <div>
-           <h3>{book.title}</h3>
-           <p>By {book.authors}</p>
-           <p>{book.categories}</p>
-           <div>
-             <span>⭐ {book.rating}</span>
-             <span>({book.ratingsCount} ratings)</span>
-           </div>
-           <p>{book.description}</p>
-         </div>
-         <div>
-           <a href={book.infoLink} target="_blank" rel="noopener noreferrer">
-             View Details
-           </a>
-         </div>
-       </div>
-     ))}
-   </div>
- ) : (
-   <p>No books found</p>
- );
 
+  return books.length > 0 ? (
+    <div className="card-main-bg max-w-6xl mx-auto px-4 py-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {books.map((book) => (
+          <div
+            key={book.id}
+            className="cards-bg shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition h-full flex flex-col"
+          >
+            <a
+              href={book.infoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <img
+                src={book.imageUrl}
+                alt={book.title}
+                className=" photo-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = getPlaceholder(book.title);
+                }}
+              />
+            </a>
+            <div className="p-4 flex-grow">
+              <h3 className="text-lg font-semibold text-black line-clamp-2">
+                {book.title}
+              </h3>
+              <p className="text-sm text-white mt-1">By {book.authors}</p>
+              <p className="text-xs text-gray-800 mt-1">{book.categories}</p>
+              <div className="flex items-center mt-2">
+                <span className="text-yellow-500 text-sm">
+                  ⭐ {book.rating}
+                </span>
+                <span className="ml-2 text-xs text-gray-500">
+                  ({book.ratingsCount} ratings)
+                </span>
+              </div>
+              <p className="text-sm text-gray-800 mt-2 line-clamp-2">
+                {book.description}
+              </p>
+            </div>
+            <div className="p-4">
+              <a
+                href={book.infoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center custom-bg hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors duration-300"
+              >
+                View Details
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ) : (
+    <p>No books found</p>
+  );
 };
 export default BookCard;

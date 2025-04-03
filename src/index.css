@@ -125,5 +125,15 @@ body {
 .hero-section {
   width: 100%;
   min-height: 100vh;
-  background-color: rgb(255, 255,255, 0.3);
+  background-color: rgb(255, 255, 255, 0.3);
+}
+.custom-bg {
+  background-color: rgba(114, 105, 201, 0.85);
+}
+.cards-bg {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+}
+.card-main-bg {
+  background-color: rgb(0, 0, 0, 0.5);
 }
