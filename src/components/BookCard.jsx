@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import SearchBar from "./SearchBar"; // your separated component
+import SearchBar from "./SearchBar";
 
 const BookCard = () => {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchInput, setSearchInput] = useState("");
-  const [query, setQuery] = useState(""); // 💡 Actual query to trigger fetch
+  const [query, setQuery] = useState("");
 
   const fetchBooks = async () => {
     if (!query) return;
 
     try {
+      setLoading(true);
       const startIndex = (page - 1) * 12;
       const response = await fetch(
         `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
@@ -43,6 +45,8 @@ const BookCard = () => {
       setTotalPages(Math.ceil(data.totalItems / 12));
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,13 +73,22 @@ const BookCard = () => {
 
   return (
     <div className="card-main-bg max-w-6xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        Book Search
+      </h1>
+
       <SearchBar
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         handleSearch={handleSearch}
       />
 
-      {books.length > 0 ? (
+      {loading ? (
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+          <p className="mt-2 text-gray-600">Loading books...</p>
+        </div>
+      ) : books.length > 0 ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {books.map((book) => (
@@ -136,7 +149,7 @@ const BookCard = () => {
           <div className="flex justify-center mt-8">
             <button
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-              disabled={page === 1}
+              disabled={page === 1 || loading}
               className={`px-4 py-2 mx-1 border rounded ${
                 page === 1
                   ? "bg-gray-200 cursor-not-allowed"
@@ -152,7 +165,7 @@ const BookCard = () => {
 
             <button
               onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={page >= totalPages}
+              disabled={page >= totalPages || loading}
               className={`px-4 py-2 mx-1 border rounded ${
                 page >= totalPages
                   ? "bg-gray-200 cursor-not-allowed"
@@ -163,12 +176,14 @@ const BookCard = () => {
             </button>
           </div>
         </>
+      ) : query ? (
+        <p className="text-center text-gray-500 text-lg">
+          No books found. Try a different search.
+        </p>
       ) : (
-        query && (
-          <p className="text-center text-gray-500 text-lg">
-            No books found. Try a different search.
-          </p>
-        )
+        <p className="text-center text-gray-500 text-lg">
+          Search for books above
+        </p>
       )}
     </div>
   );
