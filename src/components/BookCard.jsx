@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 
-const BookCard = ({ searchQuery }) => {
+const BookCard = () => {
   const [books, setBooks] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
+        const startIndex = (page - 1) * 12;
         const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-            searchQuery
-          )}&maxResults=12`
+          `https://www.googleapis.com/books/v1/volumes?q=javascript&startIndex=${startIndex}&maxResults=12`
         );
 
         if (!response.ok) throw new Error("Failed to fetch");
@@ -33,13 +34,14 @@ const BookCard = ({ searchQuery }) => {
           })) || [];
 
         setBooks(mappedBooks);
+        setTotalPages(Math.ceil(data.totalItems / 12));
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchBooks();
-  }, [searchQuery]);
+  }, [page]);
 
   const getPlaceholder = (title) => {
     const initials = title ? title[0] : "?";
@@ -69,7 +71,7 @@ const BookCard = ({ searchQuery }) => {
               <img
                 src={book.imageUrl}
                 alt={book.title}
-                className=" photo-image"
+                className="photo-image"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = getPlaceholder(book.title);
@@ -107,9 +109,41 @@ const BookCard = ({ searchQuery }) => {
           </div>
         ))}
       </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+          className={`px-4 py-2 mx-1 border rounded ${
+            page === 1
+              ? "bg-gray-200 cursor-not-allowed"
+              : "bg-gray-700 text-white hover:bg-gray-800"
+          }`}
+        >
+          Previous
+        </button>
+
+        <span className="px-4 py-2 mx-1 border rounded bg-gray-100">
+          Page {page} of {totalPages}
+        </span>
+
+        <button
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={page >= totalPages}
+          className={`px-4 py-2 mx-1 border rounded ${
+            page >= totalPages
+              ? "bg-gray-200 cursor-not-allowed"
+              : "bg-gray-700 text-white hover:bg-gray-800"
+          }`}
+        >
+          Next
+        </button>
+      </div>
     </div>
   ) : (
     <p>No books found</p>
   );
 };
+
 export default BookCard;

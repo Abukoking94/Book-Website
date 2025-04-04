@@ -22,9 +22,9 @@ function Home() {
         <button> Get Started</button>
       </div>
 
-      <div className="hero-section">
+      
         <BookCard />
-      </div>
+   
     </div>
   );
 }
