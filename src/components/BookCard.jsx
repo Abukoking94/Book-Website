@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBar"; // your separated component
 
 const BookCard = () => {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchInput, setSearchInput] = useState("");
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(""); // 💡 Actual query to trigger fetch
 
   const fetchBooks = async () => {
     if (!query) return;
@@ -46,16 +46,15 @@ const BookCard = () => {
     }
   };
 
-  //  Called when clicking the search button
   const handleSearch = (e) => {
     e.preventDefault();
     setPage(1);
-    setQuery(searchInput); 
+    setQuery(searchInput);
   };
 
   useEffect(() => {
     fetchBooks();
-  }, [query, page]); 
+  }, [query, page]);
 
   const getPlaceholder = (title) => {
     const initials = title ? title[0] : "?";
@@ -70,10 +69,6 @@ const BookCard = () => {
 
   return (
     <div className="card-main-bg max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-        Book Search
-      </h1>
-
       <SearchBar
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -137,7 +132,6 @@ const BookCard = () => {
               </div>
             ))}
           </div>
-
 
           <div className="flex justify-center mt-8">
             <button

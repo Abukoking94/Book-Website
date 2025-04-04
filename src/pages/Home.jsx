@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import BookCard from "../components/BookCard";
 
 function Home() {
+  const [showSearch, setShowSearch] = useState(false);
+
   return (
     <div className="main">
       <div className="hero-one">
@@ -13,10 +15,10 @@ function Home() {
         </div>
       </div>
       <div className="get-started">
-        <button> Get Started</button>
+        <button onClick={() => setShowSearch(true)}> Get Started</button>
       </div>
 
-      <BookCard />
+      {showSearch && <BookCard />}
     </div>
   );
 }
