@@ -135,9 +135,14 @@ body {
   color: white;
 }
 .card-main-bg {
-  background-color: rgb(0, 0, 0, 0.5);
+  background-color: rgb(0, 0, 0, 0.3);
 }
-.photo-image{
-  width:160px;
+.photo-image {
+  width: 160px;
   height: 200px;
+}
+
+
+.search-bar-container {
+  will-change: height, opacity;
 }

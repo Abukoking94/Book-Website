@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import BookCard from "../components/BookCard";
 
 function Home() {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSearch(searchTerm);
-  };
   return (
     <div className="main">
       <div className="hero-one">
@@ -22,9 +16,7 @@ function Home() {
         <button> Get Started</button>
       </div>
 
-      
-        <BookCard />
-   
+      <BookCard />
     </div>
   );
 }
