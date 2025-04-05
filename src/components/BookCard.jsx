@@ -73,7 +73,7 @@ const BookCard = () => {
   };
 
   return (
-    <div className="card-main-bg max-w-6xl mx-auto px-4 py-8">
+    <div className="w-full min-h-screen bg-white/30 px-4 py-8">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
         Book Search
       </h1>
@@ -95,105 +95,102 @@ const BookCard = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
+            className="mt-8"
           >
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {books.map((book) => (
-                  <div
-                    key={book.id}
-                    className="cards-bg shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition h-full flex flex-col"
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {books.map((book) => (
+                <div
+                  key={book.id}
+                  className="bg-white/50 text-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition h-full flex flex-col"
+                >
+                  <a
+                    href={book.infoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block flex justify-center py-4"
                   >
+                    <img
+                      src={book.imageUrl}
+                      alt={book.title}
+                      className="w-[160px] h-[200px] object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = getPlaceholder(book.title);
+                      }}
+                    />
+                  </a>
+                  <div className="p-4 flex-grow">
+                    <h3 className="text-lg font-semibold text-black line-clamp-2">
+                      {book.title}
+                    </h3>
+                    <p className="text-sm text-white mt-1">By {book.authors}</p>
+                    <p className="text-xs text-gray-800 mt-1">
+                      {book.categories}
+                    </p>
+                    <div className="flex items-center mt-2">
+                      <span className="text-yellow-500 text-sm">
+                        ⭐ {book.rating}
+                      </span>
+                      <span className="ml-2 text-xs text-gray-500">
+                        ({book.ratingsCount} ratings)
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-800 mt-2 line-clamp-2">
+                      {book.description}
+                    </p>
+                  </div>
+                  <div className="p-4">
                     <a
                       href={book.infoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block"
+                      className="block text-center bg-[rgba(114,105,201,0.85)] hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors duration-300"
                     >
-                      <img
-                        src={book.imageUrl}
-                        alt={book.title}
-                        className="photo-image"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = getPlaceholder(book.title);
-                        }}
-                      />
+                      View Details
                     </a>
-                    <div className="p-4 flex-grow">
-                      <h3 className="text-lg font-semibold text-black line-clamp-2">
-                        {book.title}
-                      </h3>
-                      <p className="text-sm text-white mt-1">
-                        By {book.authors}
-                      </p>
-                      <p className="text-xs text-gray-800 mt-1">
-                        {book.categories}
-                      </p>
-                      <div className="flex items-center mt-2">
-                        <span className="text-yellow-500 text-sm">
-                          ⭐ {book.rating}
-                        </span>
-                        <span className="ml-2 text-xs text-gray-500">
-                          ({book.ratingsCount} ratings)
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-800 mt-2 line-clamp-2">
-                        {book.description}
-                      </p>
-                    </div>
-                    <div className="p-4">
-                      <a
-                        href={book.infoLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block text-center custom-bg hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors duration-300"
-                      >
-                        View Details
-                      </a>
-                    </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
+            </div>
 
-              <div className="flex justify-center mt-8">
-                <button
-                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-                  disabled={page === 1 || loading}
-                  className={`px-4 py-2 mx-1 border rounded ${
-                    page === 1
-                      ? "bg-gray-200 cursor-not-allowed"
-                      : "bg-gray-700 text-white hover:bg-gray-800"
-                  }`}
-                >
-                  Previous
-                </button>
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                disabled={page === 1 || loading}
+                className={`px-4 py-2 mx-1 border rounded ${
+                  page === 1
+                    ? "bg-gray-200 cursor-not-allowed"
+                    : "bg-gray-700 text-white hover:bg-gray-800"
+                }`}
+              >
+                Previous
+              </button>
 
-                <span className="px-4 py-2 mx-1 border rounded bg-gray-100">
-                  Page {page} of {totalPages}
-                </span>
+              <span className="px-4 py-2 mx-1 border rounded bg-gray-100 text-black">
+                Page {page} of {totalPages}
+              </span>
 
-                <button
-                  onClick={() =>
-                    setPage((prev) => Math.min(prev + 1, totalPages))
-                  }
-                  disabled={page >= totalPages || loading}
-                  className={`px-4 py-2 mx-1 border rounded ${
-                    page >= totalPages
-                      ? "bg-gray-200 cursor-not-allowed"
-                      : "bg-gray-700 text-white hover:bg-gray-800"
-                  }`}
-                >
-                  Next
-                </button>
-              </div>
-            </>
+              <button
+                onClick={() =>
+                  setPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={page >= totalPages || loading}
+                className={`px-4 py-2 mx-1 border rounded ${
+                  page >= totalPages
+                    ? "bg-gray-200 cursor-not-allowed"
+                    : "bg-gray-700 text-white hover:bg-gray-800"
+                }`}
+              >
+                Next
+              </button>
+            </div>
           </motion.div>
         ) : query ? (
-          <p className="text-center text-gray-500 text-lg">
+          <p className="text-center text-gray-500 text-lg mt-8">
             No books found. Try a different search.
           </p>
         ) : (
-          <p className="text-center text-gray-500 text-lg">
+          <p className="text-center text-gray-500 text-lg mt-8">
             Search for books above
           </p>
         )}
