@@ -12,3 +12,110 @@ body {
   background-size: cover;
   backdrop-filter: brightness(80%);
 }
+
+.home-page {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.home-page .searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-page input {
+  text-align: center;
+  width: 720px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: rgb(255, 255, 255, 0.6);
+  outline: none;
+}
+.home-page button {
+  background-color: transparent;
+  position: relative;
+  left: -50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(59, 53, 45);
+  font-size: 20px;
+}
+.hero-one {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 50px;
+}
+
+.hero-one h1 {
+  font-size: 77px;
+
+  color: white;
+}
+.hero-one h2 {
+  font-size: 40px;
+  color: white;
+  font-weight: 250;
+}
+
+.hero-one div {
+  margin-top: 70px;
+  display: flex;
+  gap: 30px;
+}
+
+.hero-one button {
+  width: 184px;
+  height: 45px;
+  border-radius: 50px;
+  background-color: rgb(122, 113, 201, 0.85);
+  color: white;
+  cursor: pointer;
+}
+.get-started {
+  margin-top: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.get-started button {
+  width: 639px;
+  height: 51px;
+  border-radius: 50px;
+  background-color: rgb(122, 113, 201, 0.85);
+  color: white;
+  cursor: pointer;
+  margin-bottom: 70px;
+}
+.hero-section {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(255, 255, 255, 0.3);
+}
+.custom-bg {
+  background-color: rgba(114, 105, 201, 0.85);
+}
+.cards-bg {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+}
+.card-main-bg {
+  background-color: rgb(0, 0, 0, 0.3);
+}
+.photo-image {
+  width: 160px;
+  height: 200px;
+}
+
+.search-bar-container {
+  will-change: height, opacity;
+}
+
+

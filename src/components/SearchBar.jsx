@@ -7,7 +7,7 @@ const SearchBar = ({ searchInput, setSearchInput, handleSearch }) => {
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: "auto" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="home-page mb-8 flex justify-center overflow-hidden"
+      className="mb-8 flex justify-center overflow-hidden"
     >
       <motion.form
         onSubmit={handleSearch}
@@ -21,9 +21,12 @@ const SearchBar = ({ searchInput, setSearchInput, handleSearch }) => {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           type="text"
-          className="searchInput p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
+          className="p-3 border bg-[rgba(255,255,255,0.5)] border-gray-300 rounded-l-full focus:outline-0 focus:ring-grey-100 focus:border-transparent w-full text-sm"
         />
-        <button className="searchBtn bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-r-md transition-colors duration-300 flex items-center justify-center">
+        <button
+          type="submit"
+          className="bg-[rgba(255,255,255,0.5)] hover:bg-[#746da1] text-black px-4 py-2 rounded-r-full transition-colors duration-300 flex items-center justify-center  border-gray-300"
+        >
           <i className="bx bx-search-alt-2 text-lg"></i>
         </button>
       </motion.form>

@@ -14,11 +14,11 @@ function Home() {
         <h2 className="text-[28px] md:text-[40px] text-white font-light">
           Explore Our Collection
         </h2>
-        <div className="mt-[70px] flex flex-col sm:flex-row gap-[20px] sm:gap-[30px]">
-          <button className="hover:cursor-pointer w-[184px] h-[45px] rounded-full bg-[rgba(122,113,201,0.85)] text-white">
+        <div className=" mt-[70px] flex flex-col sm:flex-row gap-[20px] sm:gap-[30px]">
+          <button className="hover:bg-[#615b93] hover:cursor-pointer w-[184px] h-[45px] rounded-full bg-[rgba(122,113,201,0.85)] text-white">
             Contact Us
           </button>
-          <button className="hover:cursor-pointer w-[184px] h-[45px] rounded-full bg-[rgba(122,113,201,0.85)] text-white">
+          <button className="hover:bg-[#615b93] hover:cursor-pointer w-[184px] h-[45px] rounded-full bg-[rgba(122,113,201,0.85)] text-white">
             More...
           </button>
         </div>
@@ -27,7 +27,7 @@ function Home() {
       <div className="mt-[150px] flex justify-center items-center w-full">
         <button
           onClick={() => setShowSearch(true)}
-          className="hover:cursor-pointer w-[90%] max-w-[639px] h-[51px] rounded-full bg-[rgba(122,113,201,0.85)] text-white mb-[70px]"
+          className="hover:bg-[#615b93] hover:cursor-pointer w-[90%] max-w-[639px] h-[51px] rounded-full bg-[rgba(122,113,201,0.85)] text-white mb-[70px]"
         >
           Get Started
         </button>
