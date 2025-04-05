@@ -142,7 +142,64 @@ body {
   height: 200px;
 }
 
-
 .search-bar-container {
   will-change: height, opacity;
+}
+
+.contact-container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
+.contact-div {
+  flex-wrap: wrap;
+  gap: 30px;
+  background-color: rgb(255, 255, 255, 0.5);
+  padding: 30px 30px 30px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+.contact-container h1 {
+  font-size: 77px;
+  color: white;
+}
+
+.contact-description {
+  font-size: 30px;
+  color: white;
+  font-weight: 300;
+}
+
+.contact-div div {
+  width: 30%;
+  min-height: 200px;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  background-color: rgb(255, 255, 255, 0.5);
+}
+.contact-div div:last-of-type{
+  
+}
+.call img,
+.schedule img,
+.message img {
+  max-width: 160px;
+  height: 160px;
+  margin: 15px 0 0 15px;
+}
+
+.call h2,
+.schedule h2,
+.message h2 {
+  font-size: 24px;
+  font-weight: 600;
 }

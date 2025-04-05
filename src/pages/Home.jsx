@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BookCard from "../components/BookCard";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Home() {
   const [showSearch, setShowSearch] = useState(false);
@@ -18,7 +19,18 @@ function Home() {
         <button onClick={() => setShowSearch(true)}> Get Started</button>
       </div>
 
-      {showSearch && <BookCard />}
+      <AnimatePresence>
+        {showSearch && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="w-full"
+          >
+            {showSearch && <BookCard />}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

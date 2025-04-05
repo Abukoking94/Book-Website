@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
+import { motion, AnimatePresence } from "framer-motion";
 
 const BookCard = () => {
   const [books, setBooks] = useState([]);
@@ -83,108 +84,120 @@ const BookCard = () => {
         handleSearch={handleSearch}
       />
 
-      {loading ? (
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-          <p className="mt-2 text-gray-600">Loading books...</p>
-        </div>
-      ) : books.length > 0 ? (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {books.map((book) => (
-              <div
-                key={book.id}
-                className="cards-bg shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition h-full flex flex-col"
-              >
-                <a
-                  href={book.infoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <img
-                    src={book.imageUrl}
-                    alt={book.title}
-                    className="photo-image"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = getPlaceholder(book.title);
-                    }}
-                  />
-                </a>
-                <div className="p-4 flex-grow">
-                  <h3 className="text-lg font-semibold text-black line-clamp-2">
-                    {book.title}
-                  </h3>
-                  <p className="text-sm text-white mt-1">By {book.authors}</p>
-                  <p className="text-xs text-gray-800 mt-1">
-                    {book.categories}
-                  </p>
-                  <div className="flex items-center mt-2">
-                    <span className="text-yellow-500 text-sm">
-                      ⭐ {book.rating}
-                    </span>
-                    <span className="ml-2 text-xs text-gray-500">
-                      ({book.ratingsCount} ratings)
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-800 mt-2 line-clamp-2">
-                    {book.description}
-                  </p>
-                </div>
-                <div className="p-4">
-                  <a
-                    href={book.infoLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-center custom-bg hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors duration-300"
+      <AnimatePresence>
+        {loading ? (
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-700"></div>
+            <p className="mt-2 text-gray-600">Loading books...</p>
+          </div>
+        ) : books.length > 0 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {books.map((book) => (
+                  <div
+                    key={book.id}
+                    className="cards-bg shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition h-full flex flex-col"
                   >
-                    View Details
-                  </a>
-                </div>
+                    <a
+                      href={book.infoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <img
+                        src={book.imageUrl}
+                        alt={book.title}
+                        className="photo-image"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = getPlaceholder(book.title);
+                        }}
+                      />
+                    </a>
+                    <div className="p-4 flex-grow">
+                      <h3 className="text-lg font-semibold text-black line-clamp-2">
+                        {book.title}
+                      </h3>
+                      <p className="text-sm text-white mt-1">
+                        By {book.authors}
+                      </p>
+                      <p className="text-xs text-gray-800 mt-1">
+                        {book.categories}
+                      </p>
+                      <div className="flex items-center mt-2">
+                        <span className="text-yellow-500 text-sm">
+                          ⭐ {book.rating}
+                        </span>
+                        <span className="ml-2 text-xs text-gray-500">
+                          ({book.ratingsCount} ratings)
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-800 mt-2 line-clamp-2">
+                        {book.description}
+                      </p>
+                    </div>
+                    <div className="p-4">
+                      <a
+                        href={book.infoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-center custom-bg hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors duration-300"
+                      >
+                        View Details
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-              disabled={page === 1 || loading}
-              className={`px-4 py-2 mx-1 border rounded ${
-                page === 1
-                  ? "bg-gray-200 cursor-not-allowed"
-                  : "bg-gray-700 text-white hover:bg-gray-800"
-              }`}
-            >
-              Previous
-            </button>
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={page === 1 || loading}
+                  className={`px-4 py-2 mx-1 border rounded ${
+                    page === 1
+                      ? "bg-gray-200 cursor-not-allowed"
+                      : "bg-gray-700 text-white hover:bg-gray-800"
+                  }`}
+                >
+                  Previous
+                </button>
 
-            <span className="px-4 py-2 mx-1 border rounded bg-gray-100">
-              Page {page} of {totalPages}
-            </span>
+                <span className="px-4 py-2 mx-1 border rounded bg-gray-100">
+                  Page {page} of {totalPages}
+                </span>
 
-            <button
-              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={page >= totalPages || loading}
-              className={`px-4 py-2 mx-1 border rounded ${
-                page >= totalPages
-                  ? "bg-gray-200 cursor-not-allowed"
-                  : "bg-gray-700 text-white hover:bg-gray-800"
-              }`}
-            >
-              Next
-            </button>
-          </div>
-        </>
-      ) : query ? (
-        <p className="text-center text-gray-500 text-lg">
-          No books found. Try a different search.
-        </p>
-      ) : (
-        <p className="text-center text-gray-500 text-lg">
-          Search for books above
-        </p>
-      )}
+                <button
+                  onClick={() =>
+                    setPage((prev) => Math.min(prev + 1, totalPages))
+                  }
+                  disabled={page >= totalPages || loading}
+                  className={`px-4 py-2 mx-1 border rounded ${
+                    page >= totalPages
+                      ? "bg-gray-200 cursor-not-allowed"
+                      : "bg-gray-700 text-white hover:bg-gray-800"
+                  }`}
+                >
+                  Next
+                </button>
+              </div>
+            </>
+          </motion.div>
+        ) : query ? (
+          <p className="text-center text-gray-500 text-lg">
+            No books found. Try a different search.
+          </p>
+        ) : (
+          <p className="text-center text-gray-500 text-lg">
+            Search for books above
+          </p>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
