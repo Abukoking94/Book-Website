@@ -118,7 +118,7 @@ const BookCard = () => {
                     href={book.infoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block flex justify-center py-4"
+                    className="flex justify-center py-4"
                   >
                     <img
                       src={book.imageUrl}
@@ -163,7 +163,7 @@ const BookCard = () => {
                       href={book.infoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className=" w-[80%] text-center bg-[rgba(114,105,201,0.85)] hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors duration-300"
+                      className=" w-[80%] text-center bg-[rgba(114,105,201,0.85)] hover:bg-[rgb(131,81,189)] text-white py-2 px-4 rounded transition-colors duration-300"
                     >
                       View Details
                     </a>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 function Navbar() {
@@ -17,6 +17,9 @@ function Navbar() {
     setIsAuthenticated(false);
     navigate("/login");
   };
+
+  const navItemClass =
+    "hover:text-[rgba(114,105,201,0.85)] cursor-pointer transition-colors duration-200";
 
   return (
     <div className="w-full bg-white/40 backdrop-blur-[20px] rounded-full px-4 py-3 mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between sm:h-[60px]">
@@ -40,30 +43,47 @@ function Navbar() {
           isOpen ? "flex mt-4" : "hidden"
         } sm:mt-0 sm:flex`}
       >
-        <Link to="/" onClick={() => setIsOpen(false)}>
-          <li className="hover:text-gray-200 cursor-pointer">Home</li>
-        </Link>
-        <Link to="/favorites" onClick={() => setIsOpen(false)}>
-          <li className="hover:text-gray-200 cursor-pointer">Favorites</li>
-        </Link>
-        <Link to="/contact" onClick={() => setIsOpen(false)}>
-          <li className="hover:text-gray-200 cursor-pointer">Contact</li>
-        </Link>
+        <NavLink
+          to="/"
+          onClick={() => setIsOpen(false)}
+          className={navItemClass}
+        >
+          <li>Home</li>
+        </NavLink>
+        <NavLink
+          to="/favorites"
+          onClick={() => setIsOpen(false)}
+          className={navItemClass}
+        >
+          <li>Favorites</li>
+        </NavLink>
+        <NavLink
+          to="/contact"
+          onClick={() => setIsOpen(false)}
+          className={navItemClass}
+        >
+          <li>Contact</li>
+        </NavLink>
 
         {!isAuthenticated ? (
           <>
-            <Link to="/login" onClick={() => setIsOpen(false)}>
-              <li className="hover:text-gray-200 cursor-pointer">Login</li>
-            </Link>
-            <Link to="/signup" onClick={() => setIsOpen(false)}>
-              <li className="hover:text-gray-200 cursor-pointer">Sign Up</li>
-            </Link>
+            <NavLink
+              to="/login"
+              onClick={() => setIsOpen(false)}
+              className={navItemClass}
+            >
+              <li>Login</li>
+            </NavLink>
+            <NavLink
+              to="/signup"
+              onClick={() => setIsOpen(false)}
+              className={navItemClass}
+            >
+              <li>Sign Up</li>
+            </NavLink>
           </>
         ) : (
-          <li
-            onClick={handleLogout}
-            className="hover:text-gray-200 cursor-pointer"
-          >
+          <li onClick={handleLogout} className={navItemClass}>
             Logout
           </li>
         )}

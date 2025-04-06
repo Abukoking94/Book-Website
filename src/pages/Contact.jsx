@@ -5,7 +5,7 @@ import ScheduleImg from "../images/Schedule.png";
 
 function Contact() {
   return (
-    <div className="w-screen flex flex-col items-center justify-center min-h-[90vh] bg-cover bg-center px-4">
+    <div className="w-[100%] flex flex-col items-center justify-center min-h-[90vh] bg-cover bg-center px-4">
       <h1 className="text-[40px] sm:text-[60px] lg:text-[77px] text-white font-bold text-center">
         CONTACT US
       </h1>
@@ -14,7 +14,7 @@ function Contact() {
         Please feel free to contact us about partnership and Ideas
       </h2>
 
-      <div className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 bg-white/50 p-6 md:p-8 w-full md:w-[90%] lg:w-[80%] rounded-lg shadow-md">
+      <div className="flex flex-col md:flex-row  justify-center items-center gap-6 bg-white/50 p-6 md:p-8 w-full md:w-[90%] lg:w-[80%] rounded-lg shadow-md">
         <div className="w-full md:w-[45%] lg:w-[30%] min-h-[200px] border border-white flex flex-col items-start gap-4 bg-white/50 p-4">
           <img
             src={CallImg}

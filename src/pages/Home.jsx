@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BookCard from "../components/BookCard";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [showSearch, setShowSearch] = useState(false);
@@ -15,10 +16,12 @@ function Home() {
           Explore Our Collection
         </h2>
         <div className=" mt-[70px] flex flex-col sm:flex-row gap-[20px] sm:gap-[30px]">
-          <button className="hover:bg-[#615b93] hover:cursor-pointer w-[184px] h-[45px] rounded-full bg-[rgba(122,113,201,0.85)] text-white">
-            Contact Us
-          </button>
-          <button className="hover:bg-[#615b93] hover:cursor-pointer w-[184px] h-[45px] rounded-full bg-[rgba(122,113,201,0.85)] text-white">
+          <Link to="/contact">
+            <button className="hover:bg-[#615b93] hover:cursor-pointer w-[184px] h-[45px] rounded-full bg-[rgba(122,113,201,0.85)] text-white transition-colors duration-300">
+              Contact Us
+            </button>
+          </Link>
+          <button className="hover:bg-[#615b93] hover:cursor-pointer w-[184px] h-[45px] rounded-full bg-[rgba(122,113,201,0.85)] text-white transition-colors duration-300">
             More...
           </button>
         </div>
@@ -27,7 +30,7 @@ function Home() {
       <div className="mt-[150px] flex justify-center items-center w-full">
         <button
           onClick={() => setShowSearch(true)}
-          className="hover:bg-[#615b93] hover:cursor-pointer w-[90%] max-w-[639px] h-[51px] rounded-full bg-[rgba(122,113,201,0.85)] text-white mb-[70px]"
+          className="hover:bg-[#615b93] hover:cursor-pointer w-[90%] max-w-[639px] h-[51px] rounded-full bg-[rgba(122,113,201,0.85)] text-white mb-[70px] transition-colors duration-300"
         >
           Get Started
         </button>
