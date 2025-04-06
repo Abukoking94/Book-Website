@@ -1,9 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    setIsAuthenticated(!!user);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
+    navigate("/login");
+  };
 
   return (
     <div className="w-full bg-white/40 backdrop-blur-[20px] rounded-full px-4 py-3 mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between sm:h-[60px]">
@@ -36,9 +49,24 @@ function Navbar() {
         <Link to="/contact" onClick={() => setIsOpen(false)}>
           <li className="hover:text-gray-200 cursor-pointer">Contact</li>
         </Link>
-        <Link to="/login" onClick={() => setIsOpen(false)}>
-          <li className="hover:text-gray-200 cursor-pointer">Login</li>
-        </Link>
+
+        {!isAuthenticated ? (
+          <>
+            <Link to="/login" onClick={() => setIsOpen(false)}>
+              <li className="hover:text-gray-200 cursor-pointer">Login</li>
+            </Link>
+            <Link to="/signup" onClick={() => setIsOpen(false)}>
+              <li className="hover:text-gray-200 cursor-pointer">Sign Up</li>
+            </Link>
+          </>
+        ) : (
+          <li
+            onClick={handleLogout}
+            className="hover:text-gray-200 cursor-pointer"
+          >
+            Logout
+          </li>
+        )}
       </ul>
     </div>
   );

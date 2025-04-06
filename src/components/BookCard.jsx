@@ -73,7 +73,7 @@ const BookCard = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-white/30 px-4 py-8">
+    <div className="w-full h-[fit-content] bg-white/30 px-4 py-8">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
         Book Search
       </h1>
