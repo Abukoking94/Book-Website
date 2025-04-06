@@ -78,7 +78,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="mt-6 w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition"
+              className="mt-6 w-full hover:bg-[#615b93] bg-[rgba(122,113,201,0.85)] text-white p-2 rounded-md transition"
             >
               Login
             </button>
