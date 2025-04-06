@@ -43,8 +43,8 @@ function Navbar() {
         <Link to="/" onClick={() => setIsOpen(false)}>
           <li className="hover:text-gray-200 cursor-pointer">Home</li>
         </Link>
-        <Link to="/about" onClick={() => setIsOpen(false)}>
-          <li className="hover:text-gray-200 cursor-pointer">About Us</li>
+        <Link to="/favorites" onClick={() => setIsOpen(false)}>
+          <li className="hover:text-gray-200 cursor-pointer">Favorites</li>
         </Link>
         <Link to="/contact" onClick={() => setIsOpen(false)}>
           <li className="hover:text-gray-200 cursor-pointer">Contact</li>

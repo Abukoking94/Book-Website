@@ -72,6 +72,17 @@ const BookCard = () => {
     )}`;
   };
 
+  const handleAddToFavorites = (book) => {
+    const existing = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isAlreadyFavorite = existing.some((b) => b.id === book.id);
+    if (!isAlreadyFavorite) {
+      localStorage.setItem("favorites", JSON.stringify([...existing, book]));
+      alert("Book added to favorites!");
+    } else {
+      alert("Already in favorites");
+    }
+  };
+
   return (
     <div className="w-full h-[fit-content] bg-white/30 px-4 py-8">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
@@ -139,12 +150,20 @@ const BookCard = () => {
                       {book.description}
                     </p>
                   </div>
-                  <div className="p-4">
+                  <div className="flex justify-center items-center">
+                    <button
+                      onClick={() => handleAddToFavorites(book)}
+                      className="mt-2 w-[80%] bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded transition-colors duration-300"
+                    >
+                      Add to Favorites
+                    </button>
+                  </div>
+                  <div className="p-4 flex justify-center items-center">
                     <a
                       href={book.infoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block text-center bg-[rgba(114,105,201,0.85)] hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors duration-300"
+                      className=" w-[80%] text-center bg-[rgba(114,105,201,0.85)] hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors duration-300"
                     >
                       View Details
                     </a>
